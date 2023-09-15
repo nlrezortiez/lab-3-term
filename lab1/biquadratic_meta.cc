@@ -15,21 +15,17 @@
  #define C (0)
 #endif
 
-namespace detail
-{
-	double constexpr sqrtNewtonRaphson(double x, double curr, double prev)
-	{
-		return curr == prev
-			? curr
-			: sqrtNewtonRaphson(x, 0.5 * (curr + x / curr), curr);
-	}
+namespace detail {
+double constexpr sqrtNewtonRaphson(double x, double curr, double prev) {
+    return curr == prev ? curr
+                        : sqrtNewtonRaphson(x, 0.5 * (curr + x / curr), curr);
 }
+}  // namespace detail
 
-double constexpr ce_sqrt(double x)
-{
-	return x >= 0 && x < std::numeric_limits<double>::infinity()
-		? detail::sqrtNewtonRaphson(x, x, 0)
-		: std::numeric_limits<double>::quiet_NaN();
+double constexpr ce_sqrt(double x) {
+    return x >= 0 && x < std::numeric_limits<double>::infinity()
+               ? detail::sqrtNewtonRaphson(x, x, 0)
+               : std::numeric_limits<double>::quiet_NaN();
 }
 
 template <typename TupleType, std::size_t... Idxs>
