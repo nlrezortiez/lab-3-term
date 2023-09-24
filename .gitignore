@@ -1,0 +1,4 @@
+*bin/
+*pyvenv*
+*pycache*
+python/lib
