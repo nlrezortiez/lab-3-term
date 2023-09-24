@@ -1,4 +1,6 @@
 *bin/
 *pyvenv*
 *pycache*
-python/lib
+*lib*
+
+*.out
