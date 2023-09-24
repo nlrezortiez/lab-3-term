@@ -14,11 +14,15 @@ class Solution:
     solution_set : set = set()
     solution_amount : int = 0
 
+    def __init__(self):
+        self.solution_set = set()
+        self.solution_amount = 0
+
     def add_solution(self, solution):
         self.solution_set.add(solution)
         self.solution_amount += 1
 
-    def __check_if_inf(self):
+    def check_if_inf(self):
         for sol in self.solution_set:
             if (sol == math.inf):
                 self.solution_amount = int(math.inf)
@@ -34,6 +38,7 @@ class Equation:
     solution : Solution = Solution()
 
     def __init__(self, a = 0.0, b = 0.0, c = 0.0):
+        self.solution = Solution()
         self.a = a
         self.b = b
         self.c = c
@@ -113,8 +118,8 @@ class Equation:
                 for i in {x_1, x_2, x_3, x_4}:
                     if i != None:
                         self.solution.add_solution(i)
-                
 
+        self.solution.check_if_inf()
 
 
 

@@ -1,10 +1,10 @@
 import unittest
 import sys
+import math
 
 sys.path.insert(1, '../')
 from src import biquadratic_procedure
 
-import math
 
 biquadratic_procedure.Testing = True
 
