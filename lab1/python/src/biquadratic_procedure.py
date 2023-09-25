@@ -8,7 +8,7 @@ def get_from_stdin() -> list:
     while True:
         try:
             a, b, c = map(float, input("enter coefficients a, b and c: ").split())
-        except:
+        except ValueError:
             print("incorrect input, you must provide 3 numbers: ")
             continue
         else:
@@ -17,12 +17,8 @@ def get_from_stdin() -> list:
     return [a, b, c]
 
 
-
-
 def get_from_cmdln(cli_args: list) -> list:
     return [cli_args[1], cli_args[2], cli_args[3]]
-
-
 
 
 def get_coeffs(cli_args: list) -> list:
@@ -31,18 +27,15 @@ def get_coeffs(cli_args: list) -> list:
     if (len(cli_args) == 4):
         try:
             a, b, c = map(float, get_from_cmdln(cli_args))
-        except:
+        except ValueError:
             print("incorrect arguments provided. reading from stdin.")
             return get_from_stdin()
         else:
             return [a, b, c]
 
-
     print("incorrect or no arguments provided, reading from stdin.")
 
     return get_from_stdin()
-
-
 
 
 def try_get_pmroot(expr: float) -> list:
@@ -53,8 +46,6 @@ def try_get_pmroot(expr: float) -> list:
         return [-math.sqrt(expr), math.sqrt(expr)]
 
 
-
-
 def solve(cli_args: list) -> set:
 
     if (not Testing):
@@ -62,15 +53,14 @@ def solve(cli_args: list) -> set:
     else:
         a, b, c = map(float, cli_args)
 
-
     answer = set()
 
     if (a == 0):
 
-        if (b == 0 and c == 0): 
+        if (b == 0 and c == 0):
             return {math.inf}
 
-        elif (b == 0 and c != 0): 
+        elif (b == 0 and c != 0):
             return set()
 
         elif (b != 0):
@@ -85,7 +75,7 @@ def solve(cli_args: list) -> set:
 
         elif (discr == 0):
             x_1, x_2 = try_get_pmroot((-b) / (2 * a))
-            return {sol for sol in {x_1, x_2} if sol != None}
+            return {sol for sol in {x_1, x_2} if sol is not None}
 
         else:
             discr_root_1, discr_root_2 = try_get_pmroot(discr)
@@ -93,17 +83,14 @@ def solve(cli_args: list) -> set:
             x_1, x_2 = try_get_pmroot((-b + discr_root_1) / (2 * a))
             x_3, x_4 = try_get_pmroot((-b + discr_root_2) / (2 * a))
 
-            return {sol for sol in {x_1, x_2, x_3, x_4} if sol != None}
+            return {sol for sol in {x_1, x_2, x_3, x_4} if sol is not None}
 
     return answer
-
-
-
 
 
 if __name__ == "__main__":
 
     Testing = False
 
-    answer_set = solve(sys.argv) 
+    answer_set = solve(sys.argv)
     print(*answer_set)
